@@ -3,10 +3,13 @@ package com.android.example.pmpproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
+
+    private TextView register;
 
     private FirebaseAuth mAuth;
 
