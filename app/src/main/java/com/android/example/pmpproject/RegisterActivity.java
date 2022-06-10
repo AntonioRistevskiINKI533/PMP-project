@@ -21,9 +21,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView goBackToLogin, registerUser;
+    private TextView goBackToLogin;
     private EditText editTextEmail, editTextPassword;
     private ProgressBar progressBar;
+    private Button register;
 
     private FirebaseAuth mAuth;
 
@@ -37,8 +38,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         goBackToLogin = (TextView) findViewById(R.id.goBackToLogin);
         goBackToLogin.setOnClickListener(this);
 
-        registerUser = (Button) findViewById(R.id.register);
-        registerUser. setOnClickListener(this);
+        register = (Button) findViewById(R.id.register);
+        register.setOnClickListener(this);
 
         editTextEmail = (EditText) findViewById(R.id.email);
         editTextPassword = (EditText) findViewById(R.id.password);
