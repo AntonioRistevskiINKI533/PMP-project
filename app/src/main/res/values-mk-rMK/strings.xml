@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ПМП проект</string>
+    <string name="email_hint">Мејл адреса</string>
+    <string name="password_hint">Лозинка</string>
+    <string name="login">Најави се</string>
+    <string name="go_to_register">Регистрирај нов профил</string>
+    <string name="register">Регистрирај се</string>
+    <string name="go_to_login">Врати се на најава</string>
+    <string name="invalid_email">Ве молиме внесете валидна мејл адреса</string>
+    <string name="invalid_password">Лозинката мора да има барем 8 карактери</string>
+    <string name="missing_email">Мејл е задолжително</string>
+    <string name="missing_password">Лозинка е задолжително</string>
+    <string name="banner_description">дес</string>
+    <string name="register_success">Успешна регистрација!</string>
+    <string name="login_success">Успешна најава!</string>
+    <string name="register_failed">Неуспешна регистрација!</string>
+    <string name="login_failed">Неуспешна најава!</string>
+</resources>

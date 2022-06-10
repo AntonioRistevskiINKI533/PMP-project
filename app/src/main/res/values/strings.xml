@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">PMP project</string>
+    <string name="banner" translatable="false">Notes</string>
+    <string name="email_hint">Email address</string>
+    <string name="password_hint">Password</string>
+    <string name="login">Login</string>
+    <string name="go_to_register">Register a new account</string>
+    <string name="register">Register</string>
+    <string name="go_to_login">Go back to login</string>
+    <string name="invalid_email">Please provide a valid email!</string>
+    <string name="invalid_password">Min password length should be 8 characters!</string>
+    <string name="missing_email">Email is required</string>
+    <string name="missing_password">Password is required</string>
+    <string name="banner_description">des</string>
+    <string name="register_success">User has been register successfully!</string>
+    <string name="login_success">Login success!</string>
+    <string name="register_failed">Failed to register!</string>
+    <string name="login_failed">Failed to login!</string>
 </resources>

@@ -65,25 +65,25 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String password= editTextPassword.getText().toString().trim();
 
         if(email.isEmpty()){
-            editTextEmail.setError("Email is required!");
+            editTextEmail.setError(getResources().getString(R.string.missing_email));
             editTextEmail.requestFocus();
             return;
         }
 
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            editTextEmail.setError("Please provide valid email!");
+            editTextEmail.setError(getResources().getString(R.string.invalid_email));
             editTextEmail.requestFocus();
             return;
         }
 
         if(password.isEmpty()){
-            editTextPassword.setError("Password is required!");
+            editTextPassword.setError(getResources().getString(R.string.missing_password));
             editTextPassword.requestFocus();
             return;
         }
 
         if(password.length() < 8){
-            editTextPassword.setError("Min password length should be 8 characters!");
+            editTextPassword.setError(getResources().getString(R.string.invalid_password));
             editTextPassword.requestFocus();
             return;
         }
@@ -104,7 +104,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     //                public void onComplete(@NonNull Task<Void> task) {
 
                     //                    if(task.isSuccessful()){
-                                            Toast.makeText(RegisterActivity.this, "User has been register successfully!", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_success), Toast.LENGTH_LONG).show();
                     //                    }else{
                     //                        Toast.makeText(RegisterActivity.this, "Failed to register! try again!", Toast.LENGTH_LONG).show();
                     //                    }
@@ -112,7 +112,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     //                }
                     //    });
                     }else{
-                        Toast.makeText(RegisterActivity.this, "Failed to register!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_failed), Toast.LENGTH_LONG).show();
                         progressBar.setVisibility(View.GONE);
                     }
                 }

@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +33,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ImageButton mkd = findViewById(R.id.mkd_btn);
+        ImageButton en = findViewById(R.id.en_btn);
+
+        LanguageManager lang = new LanguageManager(this);
+
+        mkd.setOnClickListener(view -> {
+            lang.updateResource("mk");
+            recreate();
+        });
+        en.setOnClickListener(view -> {
+            lang.updateResource("en");
+            recreate();
+        });
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -63,25 +79,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String password= editTextPassword.getText().toString().trim();
 
         if(email.isEmpty()){
-            editTextEmail.setError("Email is required!");
+            editTextEmail.setError(getResources().getString(R.string.missing_email));
             editTextEmail.requestFocus();
             return;
         }
 
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            editTextEmail.setError("Please provide valid email!");
+            editTextEmail.setError(getResources().getString(R.string.invalid_email));
             editTextEmail.requestFocus();
             return;
         }
 
         if(password.isEmpty()){
-            editTextPassword.setError("Password is required!");
+            editTextPassword.setError(getResources().getString(R.string.missing_password));
             editTextPassword.requestFocus();
             return;
         }
 
 /*        if(password.length() < 8){
-            editTextPassword.setError("Min password length should be 8 characters!");
+            editTextPassword.setError(getResources().getString(R.string.invalid_password));
             editTextPassword.requestFocus();
             return;
         }*/
@@ -93,9 +109,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         if(task.isSuccessful()){
                             startActivity(new Intent(MainActivity.this,HomeActivity.class));
-                            Toast.makeText(MainActivity.this, "Login success!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this, getResources().getString(R.string.login_success), Toast.LENGTH_LONG).show();
                         }else{
-                            Toast.makeText(MainActivity.this, "Failed to login!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this, getResources().getString(R.string.login_failed), Toast.LENGTH_LONG).show();
                         }
                         progressBar.setVisibility(View.GONE);
                     }
