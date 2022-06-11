@@ -1,6 +1,7 @@
 package com.android.example.pmpproject;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -18,6 +19,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.identity.BeginSignInRequest;
+import com.google.android.gms.auth.api.identity.SignInCredential;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -25,6 +33,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    public static final int GOOGLE_SIGN_IN_CODE = 10005;
     private TextView register;
     private EditText editTextEmail, editTextPassword;
     private ProgressBar progressBar;
@@ -33,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView loginAnonymously, loginWithGoogle, loginWithFacebook;
 
     private FirebaseAuth mAuth;
+
+    GoogleSignInOptions gso;
+    GoogleSignInClient signInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +86,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         loginWithFacebook = (ImageView) findViewById(R.id.loginWithFacebook);
         loginWithFacebook.setOnClickListener(this);
+
+        //Google signIn
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        signInClient = GoogleSignIn.getClient(this,gso);
+
+        GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
+        if(signInAccount != null){
+            Toast.makeText(this,"User is logged in already!",Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     @Override
@@ -177,7 +202,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void loginWithGoogle() {
         progressBar.setVisibility(View.VISIBLE);
-        mAuth.signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+        Intent sign = signInClient.getSignInIntent();
+        startActivityForResult(sign, GOOGLE_SIGN_IN_CODE);
+
+        progressBar.setVisibility(View.GONE);
+
+        /*mAuth.signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
@@ -189,7 +220,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 progressBar.setVisibility(View.GONE);
             }
-        });
+        });*/
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == GOOGLE_SIGN_IN_CODE){
+            Task<GoogleSignInAccount> signInTask = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try{
+                GoogleSignInAccount signInAcc = signInTask.getResult(ApiException.class);
+                //signInTask.getResult(ApiException.class);
+                //finish();
+                //Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+                //startActivity(intent);
+            }catch(ApiException e){
+                Toast.makeText(this,"Error", Toast.LENGTH_SHORT).show();
+            }
+
+
+        }
     }
 
     @Override

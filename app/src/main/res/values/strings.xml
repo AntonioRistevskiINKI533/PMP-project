@@ -17,4 +17,6 @@
     <string name="register_failed">Failed to register!</string>
     <string name="login_failed">Failed to login!</string>
     <string name="login_other">Or login with:</string>
+    <string name="logout">Logout</string>
+    <string name="anonymous_user">Anonymous user</string>
 </resources>

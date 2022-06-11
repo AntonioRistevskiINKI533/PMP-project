@@ -17,4 +17,6 @@
     <string name="register_failed">Неуспешна регистрација!</string>
     <string name="login_failed">Неуспешна најава!</string>
     <string name="login_other">Или најаветесе со:</string>
+    <string name="logout">Одјависе</string>
+    <string name="anonymous_user">Анонимен корисник</string>
 </resources>
