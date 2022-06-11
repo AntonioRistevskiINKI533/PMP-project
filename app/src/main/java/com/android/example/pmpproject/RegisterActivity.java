@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -117,5 +119,31 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     }
                 }
             });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        LanguageManager lang = new LanguageManager(this);
+
+        switch  (item.getItemId()) {
+
+            case R.id.mkd_btn:
+                lang.updateResource("mk");
+                recreate();
+                break;
+            case R.id.en_btn:
+                lang.updateResource("en");
+                recreate();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

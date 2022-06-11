@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageButton mkd = findViewById(R.id.mkd_btn);
+ /*       ImageButton mkd = findViewById(R.id.mkd_btn);
         ImageButton en = findViewById(R.id.en_btn);
 
         LanguageManager lang = new LanguageManager(this);
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         en.setOnClickListener(view -> {
             lang.updateResource("en");
             recreate();
-        });
+        });*/
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -116,6 +118,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         progressBar.setVisibility(View.GONE);
                     }
                 });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        LanguageManager lang = new LanguageManager(this);
+
+        switch  (item.getItemId()) {
+
+            case R.id.mkd_btn:
+                lang.updateResource("mk");
+                recreate();
+                break;
+            case R.id.en_btn:
+                lang.updateResource("en");
+                recreate();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

@@ -94,22 +94,4 @@
         app:layout_constraintRight_toRightOf="parent"
         />
 
-    <ImageButton
-        android:id="@+id/mkd_btn"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        tools:srcCompat="@tools:sample/avatars"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register"/>
-
-    <ImageButton
-        android:id="@+id/en_btn"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        tools:srcCompat="@tools:sample/avatars"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register"/>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

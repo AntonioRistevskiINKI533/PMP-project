@@ -4,6 +4,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
+    <item
+        android:id="@+id/mkd_btn"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/macedonian_flag"
+        android:title="mkd" />
 
+    <item
+        android:id="@+id/en_btn"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/american_flag"
+        android:title="en" />
 </menu>
 
