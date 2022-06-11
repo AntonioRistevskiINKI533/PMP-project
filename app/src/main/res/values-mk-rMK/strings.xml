@@ -11,9 +11,10 @@
     <string name="invalid_password">Лозинката мора да има барем 8 карактери</string>
     <string name="missing_email">Мејл е задолжително</string>
     <string name="missing_password">Лозинка е задолжително</string>
-    <string name="banner_description">дес</string>
+    <string name="banner_description">Добредојдовте</string>
     <string name="register_success">Успешна регистрација!</string>
     <string name="login_success">Успешна најава!</string>
     <string name="register_failed">Неуспешна регистрација!</string>
     <string name="login_failed">Неуспешна најава!</string>
+    <string name="login_other">Или најаветесе со:</string>
 </resources>

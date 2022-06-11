@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText editTextEmail, editTextPassword;
     private ProgressBar progressBar;
     private Button login;
+
+    private ImageView loginAnonymously, loginWithGoogle, loginWithFacebook;
 
     private FirebaseAuth mAuth;
 
@@ -62,6 +65,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editTextPassword = (EditText) findViewById(R.id.password);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+        loginAnonymously = (ImageView) findViewById(R.id.loginAnonymously);
+        loginAnonymously.setOnClickListener(this);
+
+        loginWithGoogle = (ImageView) findViewById(R.id.loginWithGoogle);
+        loginWithGoogle.setOnClickListener(this);
+
+        loginWithFacebook = (ImageView) findViewById(R.id.loginWithFacebook);
+        loginWithFacebook.setOnClickListener(this);
     }
 
     @Override
@@ -72,6 +84,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.login:
                 login();
+                break;
+            case R.id.loginAnonymously:
+                loginAnonymously();
+                break;
+            case R.id.loginWithGoogle:
+                loginWithGoogle();
+                break;
+            case R.id.loginWithFacebook:
+                loginWithFacebook();
                 break;
         }
     }
@@ -118,6 +139,57 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         progressBar.setVisibility(View.GONE);
                     }
                 });
+    }
+
+    private void loginAnonymously() {
+        progressBar.setVisibility(View.VISIBLE);
+        mAuth.signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if(task.isSuccessful()){
+                    startActivity(new Intent(MainActivity.this,HomeActivity.class));
+                    Toast.makeText(MainActivity.this, getResources().getString(R.string.login_success), Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(MainActivity.this, getResources().getString(R.string.login_failed), Toast.LENGTH_LONG).show();
+                }
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    private void loginWithFacebook() {
+        progressBar.setVisibility(View.VISIBLE);
+        mAuth.signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if(task.isSuccessful()){
+                    startActivity(new Intent(MainActivity.this,HomeActivity.class));
+                    Toast.makeText(MainActivity.this, getResources().getString(R.string.login_success), Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(MainActivity.this, getResources().getString(R.string.login_failed), Toast.LENGTH_LONG).show();
+                }
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    private void loginWithGoogle() {
+        progressBar.setVisibility(View.VISIBLE);
+        mAuth.signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if(task.isSuccessful()){
+                    startActivity(new Intent(MainActivity.this,HomeActivity.class));
+                    Toast.makeText(MainActivity.this, getResources().getString(R.string.login_success), Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(MainActivity.this, getResources().getString(R.string.login_failed), Toast.LENGTH_LONG).show();
+                }
+                progressBar.setVisibility(View.GONE);
+            }
+        });
     }
 
     @Override
