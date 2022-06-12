@@ -8,7 +8,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        multiDexEnabled true
+        multiDexEnabled true//Added to work on phone
         applicationId "com.android.example.pmpproject"
         minSdk 19
         targetSdk 32
@@ -72,5 +72,5 @@ dependencies {
     // optional - Paging 3 Integration
     //implementation "androidx.room:room-paging:2.5.0-alpha02"
 
-    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'androidx.multidex:multidex:2.0.1'//Added to work on phone
 }
