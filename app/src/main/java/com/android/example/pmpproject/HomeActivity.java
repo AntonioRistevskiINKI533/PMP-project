@@ -11,23 +11,36 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private Button logout;
+    private Button logout, insertNewNote;
     private TextView userEmail;
 
     private FirebaseUser user;
+
+    FirebaseFirestore fStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        fStore = FirebaseFirestore.getInstance();
+
         logout = (Button) findViewById(R.id.logout);
+
+        FloatingActionButton insertNewNote = findViewById(R.id.insertNewNote);
+        insertNewNote.setOnClickListener(new View.OnClickListener(){
+            @Override public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, InsertNewNote.class));
+            }
+        });
 
         logout.setOnClickListener(new View.OnClickListener(){
             @Override public void onClick(View v) {

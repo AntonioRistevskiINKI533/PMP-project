@@ -22,4 +22,6 @@
     <string name="go_back">Go back</string>
     <string name="saved_users">Saved users</string>
     <string name="saved_users_on_device">Saved users on this device</string>
+    <string name="save">Save</string>
+    <string name="discard">Discard</string>
 </resources>

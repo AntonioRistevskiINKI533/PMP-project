@@ -79,9 +79,6 @@ public class SavedUsersActivity extends AppCompatActivity implements View.OnClic
             case R.id.login:
                 login();
                 break;
-            //case R.id.deleteUser:
-                //deleteUser();
-                //break;
         }
     }
 
