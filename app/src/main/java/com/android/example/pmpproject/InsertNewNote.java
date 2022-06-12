@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -79,13 +78,13 @@ public class InsertNewNote extends AppCompatActivity implements View.OnClickList
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(InsertNewNote.this, getResources().getString(R.string.login_success), Toast.LENGTH_LONG).show();
+                        Toast.makeText(InsertNewNote.this, getResources().getString(R.string.save_success), Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(InsertNewNote.this, getResources().getString(R.string.login_success), Toast.LENGTH_LONG).show();
+                        Toast.makeText(InsertNewNote.this, getResources().getString(R.string.error), Toast.LENGTH_LONG).show();
                     }
                 });
     }

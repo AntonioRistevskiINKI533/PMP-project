@@ -76,9 +76,6 @@ public class SavedUsersActivity extends AppCompatActivity implements View.OnClic
             case R.id.goBack:
                 startActivity(new Intent(this,MainActivity.class));
                 break;
-            case R.id.login:
-                login();
-                break;
         }
     }
 
@@ -88,37 +85,6 @@ public class SavedUsersActivity extends AppCompatActivity implements View.OnClic
         userList = db.userDao().getAllUsers();
 
         userListAdapter.setUserList(userList);
-    }
-
-    private void login() {
-        String email= "dwa";//editTextEmail.getText().toString().trim();
-        String password= "dwad";//editTextPassword.getText().toString().trim();
-
-        progressBar.setVisibility(View.VISIBLE);
-        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-
-                if(task.isSuccessful()){
-                    startActivity(new Intent(SavedUsersActivity.this,HomeActivity.class));
-                    Toast.makeText(SavedUsersActivity.this, getResources().getString(R.string.login_success), Toast.LENGTH_LONG).show();
-                }else{
-                    Toast.makeText(SavedUsersActivity.this, getResources().getString(R.string.login_failed), Toast.LENGTH_LONG).show();
-                }
-                progressBar.setVisibility(View.GONE);
-            }
-        });
-    }
-
-    private void deleteUser(String email, String password) {
-        AppDatabase db = AppDatabase.getDbInstance(this.getApplicationContext());
-
-        com.android.example.pmpproject.db.User user = new com.android.example.pmpproject.db.User();
-        user.email = email;
-        user.password = password;
-
-        db.userDao().delete(user);
-        //finish();
     }
 
     @Override

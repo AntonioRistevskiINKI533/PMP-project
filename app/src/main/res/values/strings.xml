@@ -24,4 +24,8 @@
     <string name="saved_users_on_device">Saved users on this device</string>
     <string name="save">Save</string>
     <string name="discard">Discard</string>
+    <string name="save_success">Saved successfully</string>
+    <string name="error">Error</string>
+    <string name="user_is_already_logged">User is logged in already!</string>
+    <string name="delete">Delete</string>
 </resources>

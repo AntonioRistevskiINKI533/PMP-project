@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
         if(signInAccount != null){
-            Toast.makeText(this,"User is logged in already!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,getResources().getString(R.string.user_is_already_logged),Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -259,7 +259,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
                 //startActivity(intent);
             }catch(ApiException e){
-                Toast.makeText(this,"Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
             }
 
 

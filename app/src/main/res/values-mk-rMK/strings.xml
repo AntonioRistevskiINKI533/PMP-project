@@ -24,4 +24,8 @@
     <string name="saved_users_on_device">Снимени корисници на овај уред</string>
     <string name="save">Сними</string>
     <string name="discard">Отфрли</string>
+    <string name="save_success">Успешно снимено</string>
+    <string name="error">Грешка</string>
+    <string name="user_is_already_logged">Корисникот е веќе најавен!</string>
+    <string name="delete">Избриши</string>
 </resources>
