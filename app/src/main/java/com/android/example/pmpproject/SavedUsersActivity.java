@@ -40,7 +40,7 @@ public class SavedUsersActivity extends AppCompatActivity implements View.OnClic
     List<com.android.example.pmpproject.db.User> userList;
 
     private ProgressBar progressBar;
-    private Button login, deleteUser, goBack;
+    private Button login, deleteSavedUser, goBack;
 
     private FirebaseAuth mAuth;
 
@@ -50,9 +50,6 @@ public class SavedUsersActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_saved_users);
 
         mAuth = FirebaseAuth.getInstance();
-
-        //login = (Button) findViewById(R.id.login);
-        //login.setOnClickListener(this);
 
         goBack = (Button) findViewById(R.id.goBack);
         goBack.setOnClickListener(this);
