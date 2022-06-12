@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.example.pmpproject.db.AppDatabase;
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.auth.api.identity.SignInCredential;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -34,7 +35,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final int GOOGLE_SIGN_IN_CODE = 10005;
-    private TextView register;
+    private TextView register, savedUsers;
     private EditText editTextEmail, editTextPassword;
     private ProgressBar progressBar;
     private Button login;
@@ -69,6 +70,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         register = (TextView) findViewById(R.id.register);
         register.setOnClickListener(this);
+
+        savedUsers = (TextView) findViewById(R.id.savedUsers);
+        savedUsers.setOnClickListener(this);
 
         login = (Button) findViewById(R.id.login);
         login.setOnClickListener(this);
@@ -119,6 +123,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.loginWithFacebook:
                 loginWithFacebook();
                 break;
+            case R.id.savedUsers:
+                startActivity(new Intent(this,SavedUsersActivity.class));
+                break;
         }
     }
 
@@ -158,12 +165,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if(task.isSuccessful()){
                             startActivity(new Intent(MainActivity.this,HomeActivity.class));
                             Toast.makeText(MainActivity.this, getResources().getString(R.string.login_success), Toast.LENGTH_LONG).show();
+                            insertLoginData(email, password);
                         }else{
                             Toast.makeText(MainActivity.this, getResources().getString(R.string.login_failed), Toast.LENGTH_LONG).show();
                         }
                         progressBar.setVisibility(View.GONE);
                     }
                 });
+    }
+
+    private void insertLoginData(String email, String password) {
+        AppDatabase db = AppDatabase.getDbInstance(this.getApplicationContext());
+
+        com.android.example.pmpproject.db.User user = new com.android.example.pmpproject.db.User();
+        user.email = email;
+        user.password = password;
+
+        db.userDao().insertUser(user);
+        //finish();
     }
 
     private void loginAnonymously() {

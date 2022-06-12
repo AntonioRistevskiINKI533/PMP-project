@@ -19,4 +19,7 @@
     <string name="login_other">Or login with:</string>
     <string name="logout">Logout</string>
     <string name="anonymous_user">Anonymous user</string>
+    <string name="go_back">Go back</string>
+    <string name="saved_users">Saved users</string>
+    <string name="saved_users_on_device">Saved users on this device</string>
 </resources>

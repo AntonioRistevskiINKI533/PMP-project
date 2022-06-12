@@ -19,4 +19,7 @@
     <string name="login_other">Или најаветесе со:</string>
     <string name="logout">Одјависе</string>
     <string name="anonymous_user">Анонимен корисник</string>
+    <string name="go_back">Назад</string>
+    <string name="saved_users">"Снимени корисници "</string>
+    <string name="saved_users_on_device">Снимени корисници на овај уред</string>
 </resources>
