@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.example.pmpproject.db.AppDatabase;
+import com.android.example.pmpproject.db.User;
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.auth.api.identity.SignInCredential;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -177,12 +178,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void insertLoginData(String email, String password) {
         AppDatabase db = AppDatabase.getDbInstance(this.getApplicationContext());
 
-        com.android.example.pmpproject.db.User user = new com.android.example.pmpproject.db.User();
-        user.email = email;
-        user.password = password;
+        User result = db.userDao().getUserByEmail(email);
+        if(result == null){
+            com.android.example.pmpproject.db.User user = new com.android.example.pmpproject.db.User();
+            user.email = email;
+            user.password = password;
+            db.userDao().insertUser(user);
+            //finish();
+        }
 
-        db.userDao().insertUser(user);
-        //finish();
     }
 
     private void loginAnonymously() {
