@@ -67,14 +67,14 @@ public class InsertNewNote extends AppCompatActivity implements View.OnClickList
     private void saveNewNote() {
         // Create a new user with a first and last name
         Map<String, Object> note = new HashMap<>();
-        note.put("email", user.getEmail());
-        note.put("title", noteTitleField.getText());
-        note.put("text", noteTextField.getText());
+        note.put("email", user.getEmail().toString());
+        note.put("title", noteTitleField.getText().toString());
+        note.put("text", noteTextField.getText().toString());
 
         // Add a new document with a generated ID
-        DocumentReference db = fStore.collection("notes").document();
+        //DocumentReference db = fStore.collection("notes").document();
 
-        db.collection("notes")
+        fStore.collection("notes")
                 .add(note)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
