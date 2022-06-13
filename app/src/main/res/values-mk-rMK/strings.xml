@@ -28,4 +28,5 @@
     <string name="error">Грешка</string>
     <string name="user_is_already_logged">Корисникот е веќе најавен!</string>
     <string name="delete">Избриши</string>
+    <string name="failed_to_get_notes">Грешка при земање подаоци</string>
 </resources>

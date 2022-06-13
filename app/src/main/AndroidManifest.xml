@@ -10,10 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PMPProject">
         <activity
+            android:name=".ViewNoteActivity"
+            android:exported="false" />
+        <activity
             android:name=".SavedUsersActivity"
             android:exported="false" />
         <activity
-            android:name=".InsertNewNote"
+            android:name=".InsertNoteActivity"
             android:exported="false" />
         <activity
             android:name=".HomeActivity"

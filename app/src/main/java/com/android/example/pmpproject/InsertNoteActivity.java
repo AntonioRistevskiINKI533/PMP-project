@@ -22,7 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InsertNewNote extends AppCompatActivity implements View.OnClickListener {
+public class InsertNoteActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button saveNote, discardNote;
     private EditText noteTitleField, noteTextField;
@@ -34,7 +34,7 @@ public class InsertNewNote extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_insert_new_note);
+        setContentView(R.layout.activity_insert_note);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -54,6 +54,7 @@ public class InsertNewNote extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.discardNote:
+                discardNote();
                 startActivity(new Intent(this,HomeActivity.class));
                 break;
             case R.id.saveNote:
@@ -78,15 +79,19 @@ public class InsertNewNote extends AppCompatActivity implements View.OnClickList
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(InsertNewNote.this, getResources().getString(R.string.save_success), Toast.LENGTH_LONG).show();
+                        Toast.makeText(InsertNoteActivity.this, getResources().getString(R.string.save_success), Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(InsertNewNote.this, getResources().getString(R.string.error), Toast.LENGTH_LONG).show();
+                        Toast.makeText(InsertNoteActivity.this, getResources().getString(R.string.error), Toast.LENGTH_LONG).show();
                     }
                 });
+    }
+
+    private void discardNote() {
+
     }
 
     @Override

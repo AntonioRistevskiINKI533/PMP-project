@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InsertNewNote">
+    tools:context=".ViewNoteActivity">
 
     <EditText
         android:id="@+id/noteTitleField"
@@ -41,7 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/discardNote"
+        android:id="@+id/deleteNote"
         android:layout_width="188dp"
         android:layout_height="55dp"
         android:layout_marginStart="16dp"
