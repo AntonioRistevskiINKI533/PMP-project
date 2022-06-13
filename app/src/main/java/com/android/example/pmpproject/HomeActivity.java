@@ -37,6 +37,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private ListView notesListView;
     List<String> notes_array_list;
+    List<String> notes_array_list_ids;
 
     private FirebaseUser user;
 
@@ -64,21 +65,29 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        setUserData();//Sets the email
+        setUserData();//Sets the email and UID
 
         notesListView = (ListView) findViewById(R.id.notes_list_view);
         notesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(HomeActivity.this, ViewNoteActivity.class));
+                //startActivity(new Intent(HomeActivity.this, ViewNoteActivity.class));
+                String docId = notes_array_list_ids.get(position);
+
+                Intent i = new Intent(HomeActivity.this, ViewNoteActivity.class);
+
+                Bundle bundle = new Bundle();
+
+                bundle.putString("docId", docId);
+
+                i.putExtras(bundle);
+
+                startActivity(i);
             }
         });
 
+        notes_array_list_ids = new ArrayList<String>();
         notes_array_list = new ArrayList<String>();
-/*      notes_array_list.add("dwadwadwa1");
-        notes_array_list.add("dwadwadwa2");
-        notes_array_list.add("dwadwadwa3");
-        notes_array_list.add("dwadwadwa4");*/
 
         //Query query = fStore.collection("notes").orderBy("title");
         fStore.collection("notes").whereEqualTo("UID",UID)
@@ -91,6 +100,7 @@ public class HomeActivity extends AppCompatActivity {
                                 System.out.println(document.getId() + document.getData());
                                 //Log.d(TAG, document.getId() + " => " + document.getData());
                                 notes_array_list.add(document.getString("title").toString());
+                                notes_array_list_ids.add(document.getId().toString());
                             }
 
                             fillListView();
