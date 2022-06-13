@@ -24,6 +24,9 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ViewNoteActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button saveNote, deleteNote;
@@ -138,7 +141,25 @@ public class ViewNoteActivity extends AppCompatActivity implements View.OnClickL
 
     private void saveNote() {
 
+        Map<String, Object> city = new HashMap<>();
+        city.put("UID", user.getUid().toString());
+        city.put("title", noteTitleField.getText().toString());
+        city.put("text", noteTextField.getText().toString());
 
+        fStore.collection("notes").document(docId)
+                .set(city)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        //Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //Log.w(TAG, "Error writing document", e);
+                    }
+                });
     }
 
     @Override
