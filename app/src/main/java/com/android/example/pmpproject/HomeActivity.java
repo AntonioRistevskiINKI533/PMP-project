@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -31,6 +32,8 @@ public class HomeActivity extends AppCompatActivity {
 
     private Button logout, insertNewNote;
     private TextView userEmail;
+
+    String email, UID;
 
     private ListView notesListView;
     List<String> notes_array_list;
@@ -64,14 +67,21 @@ public class HomeActivity extends AppCompatActivity {
         setUserData();//Sets the email
 
         notesListView = (ListView) findViewById(R.id.notes_list_view);
+        notesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                startActivity(new Intent(HomeActivity.this, ViewNoteActivity.class));
+            }
+        });
+
         notes_array_list = new ArrayList<String>();
-/*        notes_array_list.add("dwadwadwa1");
+/*      notes_array_list.add("dwadwadwa1");
         notes_array_list.add("dwadwadwa2");
         notes_array_list.add("dwadwadwa3");
         notes_array_list.add("dwadwadwa4");*/
 
         //Query query = fStore.collection("notes").orderBy("title");
-        fStore.collection("notes")
+        fStore.collection("notes").whereEqualTo("UID",UID)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -105,7 +115,8 @@ public class HomeActivity extends AppCompatActivity {
         userEmail = (TextView) findViewById(R.id.userEmail);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
-        String email = user.getEmail();
+        UID = user.getUid();
+        email = user.getEmail();
         if(email != null){
             userEmail.setText(email);
         }

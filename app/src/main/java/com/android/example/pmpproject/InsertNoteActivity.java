@@ -67,7 +67,7 @@ public class InsertNoteActivity extends AppCompatActivity implements View.OnClic
     private void saveNewNote() {
         // Create a new user with a first and last name
         Map<String, Object> note = new HashMap<>();
-        note.put("email", user.getEmail().toString());
+        note.put("UID", user.getUid().toString());
         note.put("title", noteTitleField.getText().toString());
         note.put("text", noteTextField.getText().toString());
 
