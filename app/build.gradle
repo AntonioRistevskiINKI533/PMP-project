@@ -73,4 +73,7 @@ dependencies {
     //implementation "androidx.room:room-paging:2.5.0-alpha02"
 
     implementation 'androidx.multidex:multidex:2.0.1'//Added to work on phone
+
+    //implementation 'com.google.firebase:firebase-core:17.2.2'//new for querying
+    ///implementation 'com.firebaseui:firebase-ui-firestore:4.1.0'//new for querying
 }

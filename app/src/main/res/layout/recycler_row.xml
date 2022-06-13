@@ -33,10 +33,10 @@
 
     <Button
         android:id="@+id/deleteSavedUser"
-        android:layout_width="wrap_content"
+        android:layout_width="37dp"
         android:layout_height="wrap_content"
         android:text="X"
-        android:textSize="20sp"
+        android:textSize="12sp"
         android:backgroundTint="@color/design_default_color_error"
         android:textColor="#ffffff"
         android:textStyle="bold"
