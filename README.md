@@ -26,5 +26,11 @@
 
 Се разбира после одјава и повторна најава се стои зачувано во Firestore.
 
+Апликацијата е поврзана и со Firebase Messaging, и преку Firebase може да се праќаат нотификации на пример во моментот или секој ден во одредено време.
+
+![image](https://user-images.githubusercontent.com/62266696/173687919-add715a3-20fd-4797-8494-19664df28dd8.png)
+![image](https://user-images.githubusercontent.com/62266696/173688115-b8f087fe-0949-4081-94da-36e291323cd8.png)
+
+
 
 
