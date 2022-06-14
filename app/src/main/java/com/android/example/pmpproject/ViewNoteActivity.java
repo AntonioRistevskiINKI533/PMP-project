@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.core.view.QueryParams;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -61,6 +63,25 @@ public class ViewNoteActivity extends AppCompatActivity implements View.OnClickL
 
         //Extract the docId from HomeActivity.
         docId = bundle.getString("docId");
+
+        DocumentReference docRef = fStore.collection("notes").document(docId);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        noteTitleField.setText(document.getString("title").toString());
+                        noteTextField.setText(document.getString("text").toString());
+                        //Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                    } else {
+                        //Log.d(TAG, "No such document");
+                    }
+                } else {
+                    //Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
 
 /*        fStore.collection("notes").whereEqualTo("UID","TuvJB8xmQUY5JBojzaNNeu8mPkg1")
                 .get()
