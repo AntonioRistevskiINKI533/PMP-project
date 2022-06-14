@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class ViewNoteActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button saveNote, deleteNote;
+    private Button saveNote, deleteNote, cancel;
     private EditText noteTitleField, noteTextField;
 
     private FirebaseUser user;
@@ -47,6 +47,9 @@ public class ViewNoteActivity extends AppCompatActivity implements View.OnClickL
 
         saveNote = (Button) findViewById(R.id.saveNote);
         saveNote.setOnClickListener(this);
+
+        cancel = (Button) findViewById(R.id.cancel);
+        cancel.setOnClickListener(this);
 
         deleteNote = (Button) findViewById(R.id.deleteNote);
         deleteNote.setOnClickListener(this);
@@ -91,6 +94,9 @@ public class ViewNoteActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.saveNote:
                 saveNote();
+                startActivity(new Intent(this,HomeActivity.class));
+                break;
+            case R.id.cancel:
                 startActivity(new Intent(this,HomeActivity.class));
                 break;
         }

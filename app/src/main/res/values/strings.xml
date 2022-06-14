@@ -30,11 +30,12 @@
     <string name="delete">Delete</string>
     <string name="failed_to_get_notes">Failed to get notes</string>
     <string name="delete_success">Delete success</string>
-
+    <string name="cancel">Cancel</string>
 
     <string name="facebook_app_id">397975522104185</string>
     <string name="fb_login_protocol_scheme">fb1234</string>
     <string name="facebook_client_token">904053dce56238f713711d8837c66044</string>
+
 
 
 </resources>
