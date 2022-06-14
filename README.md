@@ -22,7 +22,9 @@
 
 Со кликање на некоја од пораките од листата можен е и нејзин преглед, промена или бришење.
 
-![image](https://user-images.githubusercontent.com/62266696/173676502-a3a7e030-41c3-438a-8966-2b8fd5f0e4a3.png)
+![image](https://user-images.githubusercontent.com/62266696/173676697-6b6d21e8-548e-476e-b207-8ea3a6fcf300.png)
+
+Се разбира после одјава и повторна најава се стои зачувано во Firestore.
 
 
 
