@@ -71,7 +71,7 @@ public class HomeActivity extends AppCompatActivity {
         notesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //startActivity(new Intent(HomeActivity.this, ViewNoteActivity.class));
+
                 String docId = notes_array_list_ids.get(position);
 
                 Intent i = new Intent(HomeActivity.this, ViewNoteActivity.class);

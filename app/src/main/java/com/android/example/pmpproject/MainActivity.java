@@ -21,6 +21,11 @@ import android.widget.Toast;
 
 import com.android.example.pmpproject.db.AppDatabase;
 import com.android.example.pmpproject.db.User;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.auth.api.identity.SignInCredential;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -32,6 +37,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -45,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private FirebaseAuth mAuth;
 
+    CallbackManager callbackManager;
+
     GoogleSignInOptions gso;
     GoogleSignInClient signInClient;
 
@@ -53,21 +62,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
- /*       ImageButton mkd = findViewById(R.id.mkd_btn);
-        ImageButton en = findViewById(R.id.en_btn);
-
-        LanguageManager lang = new LanguageManager(this);
-
-        mkd.setOnClickListener(view -> {
-            lang.updateResource("mk");
-            recreate();
-        });
-        en.setOnClickListener(view -> {
-            lang.updateResource("en");
-            recreate();
-        });*/
-
         mAuth = FirebaseAuth.getInstance();
+
+        callbackManager = CallbackManager.Factory.create();
+
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        startActivity(new Intent(MainActivity.this,HomeActivity.class));
+                        Toast.makeText(MainActivity.this, getResources().getString(R.string.login_success), Toast.LENGTH_LONG).show();
+                        finish();
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        // App code
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        Toast.makeText(MainActivity.this, getResources().getString(R.string.login_failed), Toast.LENGTH_LONG).show();
+                    }
+                });
 
         register = (TextView) findViewById(R.id.register);
         register.setOnClickListener(this);
@@ -184,7 +201,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             user.email = email;
             user.password = password;
             db.userDao().insertUser(user);
-            //finish();
         }
 
     }
@@ -207,47 +223,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void loginWithFacebook() {
-        progressBar.setVisibility(View.VISIBLE);
-        mAuth.signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
 
-                if(task.isSuccessful()){
-                    startActivity(new Intent(MainActivity.this,HomeActivity.class));
-                    Toast.makeText(MainActivity.this, getResources().getString(R.string.login_success), Toast.LENGTH_LONG).show();
-                }else{
-                    Toast.makeText(MainActivity.this, getResources().getString(R.string.login_failed), Toast.LENGTH_LONG).show();
-                }
-                progressBar.setVisibility(View.GONE);
-            }
-        });
+        progressBar.setVisibility(View.VISIBLE);
+
+        LoginManager.getInstance().logInWithReadPermissions(MainActivity.this, Arrays.asList("public_profile"));
+
+        progressBar.setVisibility(View.GONE);
+
     }
 
     private void loginWithGoogle() {
+
         progressBar.setVisibility(View.VISIBLE);
 
         Intent sign = signInClient.getSignInIntent();
         startActivityForResult(sign, GOOGLE_SIGN_IN_CODE);
 
         progressBar.setVisibility(View.GONE);
-
-        /*mAuth.signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-
-                if(task.isSuccessful()){
-                    startActivity(new Intent(MainActivity.this,HomeActivity.class));
-                    Toast.makeText(MainActivity.this, getResources().getString(R.string.login_success), Toast.LENGTH_LONG).show();
-                }else{
-                    Toast.makeText(MainActivity.this, getResources().getString(R.string.login_failed), Toast.LENGTH_LONG).show();
-                }
-                progressBar.setVisibility(View.GONE);
-            }
-        });*/
     }
+
+    /*@Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);//fb
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == GOOGLE_SIGN_IN_CODE){
@@ -256,8 +259,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 GoogleSignInAccount signInAcc = signInTask.getResult(ApiException.class);
                 //signInTask.getResult(ApiException.class);
                 //finish();
-                //Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
-                //startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+                startActivity(intent);
             }catch(ApiException e){
                 Toast.makeText(this,getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
             }

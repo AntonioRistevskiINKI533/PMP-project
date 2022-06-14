@@ -76,4 +76,6 @@ dependencies {
 
     //implementation 'com.google.firebase:firebase-core:17.2.2'//new for querying
     ///implementation 'com.firebaseui:firebase-ui-firestore:4.1.0'//new for querying
+
+    implementation 'com.facebook.android:facebook-android-sdk:latest.release'//adding release, fixed duplicate error
 }

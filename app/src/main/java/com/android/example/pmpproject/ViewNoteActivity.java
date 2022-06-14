@@ -18,13 +18,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.core.view.QueryParams;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -75,57 +71,15 @@ public class ViewNoteActivity extends AppCompatActivity implements View.OnClickL
                         noteTextField.setText(document.getString("text").toString());
                         //Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                     } else {
+                        Toast.makeText(ViewNoteActivity.this, getResources().getString(R.string.failed_to_get_notes), Toast.LENGTH_LONG).show();
                         //Log.d(TAG, "No such document");
                     }
                 } else {
-                    //Log.d(TAG, "get failed with ", task.getException());
+                    Toast.makeText(ViewNoteActivity.this, getResources().getString(R.string.failed_to_get_notes), Toast.LENGTH_LONG).show();
                 }
             }
         });
 
-/*        fStore.collection("notes").whereEqualTo("UID","TuvJB8xmQUY5JBojzaNNeu8mPkg1")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                String a = document.getId().toString();
-                                System.out.println(document.getId() + document.getData());
-                                //Log.d(TAG, document.getId() + " => " + document.getData());
-                                if(a == "6cixm11FqOOXRXcI9J8U"){
-                                    noteTitleField.setText(document.get("title").toString());
-                                    noteTextField.setText(document.get("text").toString());
-                                }
-                            }
-
-                        } else {
-                            Toast.makeText(ViewNoteActivity.this, getResources().getString(R.string.failed_to_get_notes), Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });*/
-
-       /* fStore.collection("notes").document("6cixm11FqOOXRXcI9J8U")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener() {
-                    @Override
-                    public void onComplete(@NonNull Task task) {
-                        if (task.isSuccessful()) {
-                            *//*for (QueryDocumentSnapshot document : task.getResult()) {
-                                System.out.println(document.getId() + document.getData());
-                                //Log.d(TAG, document.getId() + " => " + document.getData());
-                                noteTitleField.setText(document.get("title").toString());
-                                noteTextField.setText(document.get("text").toString());
-                            }*//*
-                            Object document = task.getResult();
-                            //noteTitleField.setText(document.get("title").toString());
-                            //noteTextField.setText(document.get("text").toString());
-
-                        } else {
-                            Toast.makeText(ViewNoteActivity.this, getResources().getString(R.string.error), Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });*/
     }
 
     @Override
@@ -149,12 +103,14 @@ public class ViewNoteActivity extends AppCompatActivity implements View.OnClickL
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+                        Toast.makeText(ViewNoteActivity.this, getResources().getString(R.string.delete_success), Toast.LENGTH_LONG).show();
                         //Log.d(TAG, "DocumentSnapshot successfully deleted!");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(ViewNoteActivity.this, getResources().getString(R.string.error), Toast.LENGTH_LONG).show();
                         //Log.w(TAG, "Error deleting document", e);
                     }
                 });
@@ -172,12 +128,14 @@ public class ViewNoteActivity extends AppCompatActivity implements View.OnClickL
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+                        Toast.makeText(ViewNoteActivity.this, getResources().getString(R.string.save_success), Toast.LENGTH_LONG).show();
                         //Log.d(TAG, "DocumentSnapshot successfully written!");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(ViewNoteActivity.this, getResources().getString(R.string.error), Toast.LENGTH_LONG).show();
                         //Log.w(TAG, "Error writing document", e);
                     }
                 });
