@@ -208,6 +208,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if(task.isSuccessful()){
+                            Bundle bundle = new Bundle();
+                            bundle.putString(FirebaseAnalytics.Param.METHOD, "email_password");
+                            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN, bundle);
+
                             startActivity(new Intent(MainActivity.this,HomeActivity.class));
                             Toast.makeText(MainActivity.this, getResources().getString(R.string.login_success), Toast.LENGTH_LONG).show();
                             insertLoginData(email, password);
@@ -239,6 +243,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if(task.isSuccessful()){
+                    Bundle bundle = new Bundle();
+                    bundle.putString(FirebaseAnalytics.Param.METHOD, "anonymously");
+                    mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN, bundle);
+
                     startActivity(new Intent(MainActivity.this,HomeActivity.class));
                     Toast.makeText(MainActivity.this, getResources().getString(R.string.login_success), Toast.LENGTH_LONG).show();
                 }else{

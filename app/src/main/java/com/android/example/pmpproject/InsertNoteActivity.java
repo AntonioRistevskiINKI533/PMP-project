@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -31,6 +32,8 @@ public class InsertNoteActivity extends AppCompatActivity implements View.OnClic
 
     FirebaseFirestore fStore;
 
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +42,8 @@ public class InsertNoteActivity extends AppCompatActivity implements View.OnClic
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         fStore = FirebaseFirestore.getInstance();
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         saveNote = (Button) findViewById(R.id.saveNote);
         saveNote.setOnClickListener(this);
@@ -79,6 +84,12 @@ public class InsertNoteActivity extends AppCompatActivity implements View.OnClic
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
+                        //FirebaseAnalytics, log a saveNote event
+                        Bundle params = new Bundle();
+                        params.putString("title", "test");
+                        params.putString("text", "test");
+                        mFirebaseAnalytics.logEvent("save_note", params);
+
                         Toast.makeText(InsertNoteActivity.this, getResources().getString(R.string.save_success), Toast.LENGTH_LONG).show();
                     }
                 })

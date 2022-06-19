@@ -2,6 +2,7 @@ package com.android.example.pmpproject;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.android.example.pmpproject.db.User;
 import com.android.example.pmpproject.db.UserDao;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -28,6 +30,8 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
     private List<User> userList;
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();;
+
+    private FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(context);
 
     public UserListAdapter(Context context) {
         this.context = context;
@@ -63,6 +67,10 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+                            Bundle bundle = new Bundle();
+                            bundle.putString(FirebaseAnalytics.Param.METHOD, "email_password");
+                            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN, bundle);
+
                             Intent intent =  new Intent(context, HomeActivity.class);
                             context.startActivity(intent);
                             Toast.makeText(view.getContext(), holder.itemView.getContext().getResources().getString(R.string.login_success), Toast.LENGTH_LONG).show();
